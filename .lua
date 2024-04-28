@@ -55,6 +55,7 @@ T1:Toggle("Auto swing enemy",false,function(value)
       if var.swing == false then break end
         lib:children(workspace["SpawnedEnemies"],function(array)
           game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer(1,array,var.id)
+          game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer(1)
         end)
     end
 end)
@@ -65,6 +66,7 @@ T1:Toggle("Auto parry",false,function(value)
       if var.swing == false then break end
         lib:children(workspace["SpawnedEnemies"],function(array)
           game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer(2,array,var.id)
+          game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer(2)
         end)
     end
 end)
@@ -75,6 +77,7 @@ T1:Toggle("Auto use ability1 to enemy",false,function(value)
       if var.ability[1] == false then break end
         lib:children(workspace["SpawnedEnemies"],function(array)
           game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer("Ability1",array,var.id)
+          game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer("Ability1")
         end)
     end
 end)
@@ -85,9 +88,25 @@ T1:Toggle("Auto use ability2 to enemy",false,function(value)
       if var.ability[2] == false then break end
         lib:children(workspace["SpawnedEnemies"],function(array)
           game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer("Ability2",{array},var.id)
+          game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer("Ability2")
         end)
     end
 end)
+
+if var.self.Name == "Rivanda_Cheater" then
+local T100 = wndw:Tab("Enemies")
+T100:Button("Remote spy",function()
+    lib:RemoteSpy()
+end)
+
+T100:Button("Dex",function()
+    lib:DEX()
+end)
+  
+T100:Button("Turtle Explorer",function()
+        lib:TurtleExplorer()
+end)
+end
 
 lib:HookFunction(function(method,name,args)
     if method == "FireServer" and name == "damageEnemy" and args[1] == 1 or args[1] == 2 or args[1] == "Ability1" or args[1] == "Ability2" and type(args[3]) == "userdata" or type(args[3]) == "number" then
