@@ -107,6 +107,7 @@ T1:Toggle("Auto swing enemy",false,function(value)
       if var.swing == false then break end
         lib:children(workspace["SpawnedEnemies"],function(array)
           game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer(1,array,var.id)
+          game:GetService("ReplicatedStorage")["Events"]["Ability"]:FireServer(1)
         end)
     end
 end)
@@ -117,6 +118,7 @@ T1:Toggle("Auto parry",false,function(value)
       if var.swing == false then break end
         lib:children(workspace["SpawnedEnemies"],function(array)
           game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer(2,array,var.id)
+          game:GetService("ReplicatedStorage")["Events"]["Ability"]:FireServer(2)
         end)
     end
 end)
@@ -127,6 +129,7 @@ T1:Toggle("Auto use ability1 to enemy",false,function(value)
       if var.ability[1] == false then break end
         lib:children(workspace["SpawnedEnemies"],function(array)
           game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer("Ability1",array,var.id)
+          game:GetService("ReplicatedStorage")["Events"]["Ability"]:FireServer("Ability1")
         end)
     end
 end)
@@ -137,6 +140,7 @@ T1:Toggle("Auto use ability2 to enemy",false,function(value)
       if var.ability[2] == false then break end
         lib:children(workspace["SpawnedEnemies"],function(array)
           game:GetService("ReplicatedStorage")["Events"]["damageEnemy"]:FireServer("Ability2",{array},var.id)
+          game:GetService("ReplicatedStorage")["Events"]["Ability"]:FireServer("Ability2")
         end)
     end
 end)
@@ -159,7 +163,7 @@ end
 lib:HookFunction(function(method,name,args)
     if method == "FireServer" and name == "damageEnemy" and args[1] == 1 or args[1] == 2 or args[1] == "Ability1" or args[1] == "Ability2" and type(args[3]) == "userdata" or type(args[3]) == "number" then
       var.id = args[3]
-    elseif method == "FireServer" and name == "damageEnemy" and args[4] == true then
+    elseif method == "FireServer" and name == "damageEnemy" and args[4] == true and args[1] == "Ability1" then
       var.heal.id = args[3]
     end
 end)
